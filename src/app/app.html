@@ -1,7 +1,7 @@
-<div class="min-h-dvh bg-slate-100 pb-8 transition-colors dark:bg-slate-950">
+<div class="min-h-dvh bg-slate-100 pb-12 transition-colors dark:bg-slate-950">
   <div class="mx-auto flex min-h-dvh w-full max-w-md flex-col px-3.5 safe-top safe-bottom">
     <!-- BARRA SUPERIOR DE MARCA Y TEMA -->
-    <header class="mb-3 flex items-center justify-between pt-1">
+    <header class="mb-2 flex items-center justify-between pt-1">
       <div class="flex items-center gap-2.5">
         <div
           class="flex h-10 w-10 items-center justify-center rounded-2xl bg-gradient-to-br from-sky-500 to-blue-600 text-white shadow-md shadow-sky-600/25"
@@ -11,151 +11,259 @@
           </svg>
         </div>
         <div>
-          <h1 class="text-lg font-black tracking-tight text-slate-900 dark:text-white">
+          <h1 class="text-base font-black tracking-tight text-slate-900 dark:text-white">
             GoteoMed
             <span
               class="ml-0.5 rounded-md bg-sky-100 px-1.5 py-0.5 text-[10px] font-extrabold text-sky-700 align-middle dark:bg-sky-950 dark:text-sky-300"
             >
-              APH
+              Turnos & APH
             </span>
           </h1>
-          <p class="text-[11px] font-medium text-slate-500 dark:text-slate-400">
-            Venoclisis · Enfermería & Prehospitalaria
+          <p class="text-[10px] font-semibold text-slate-500 dark:text-slate-400">
+            Control Multi-Paciente · Venoclisis
           </p>
         </div>
       </div>
 
-      <!-- Botón de modo oscuro (Auto / Claro / Oscuro) -->
-      <button
-        type="button"
-        (click)="cycleTheme()"
-        title="Cambiar tema (Automático / Claro / Oscuro)"
-        class="flex items-center gap-1.5 rounded-full border border-slate-200 bg-white px-3 py-1.5 text-xs font-bold text-slate-600 shadow-xs transition hover:bg-slate-50 active:scale-95 dark:border-slate-800 dark:bg-slate-900 dark:text-slate-300 dark:hover:bg-slate-800"
-      >
-        @if (theme.isDark()) {
-          <svg class="h-3.5 w-3.5 text-sky-400" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round">
-            <path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z" />
-          </svg>
-        } @else {
-          <svg class="h-3.5 w-3.5 text-amber-500" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round">
-            <circle cx="12" cy="12" r="5" />
-            <line x1="12" y1="1" x2="12" y2="3" />
-            <line x1="12" y1="21" x2="12" y2="23" />
-            <line x1="4.22" y1="4.22" x2="5.64" y2="5.64" />
-            <line x1="18.36" y1="18.36" x2="19.78" y2="19.78" />
-            <line x1="1" y1="12" x2="3" y2="12" />
-            <line x1="21" y1="12" x2="23" y2="12" />
-            <line x1="4.22" y1="19.78" x2="5.64" y2="18.36" />
-            <line x1="18.36" y1="5.64" x2="19.78" y2="4.22" />
-          </svg>
-        }
-        <span>{{ themeLabel() }}</span>
-      </button>
-    </header>
-
-    <!-- BANNER CLÍNICO AZUL + BOTÓN DE AYUDA -->
-    <div
-      class="mb-3 flex items-center justify-between rounded-2xl bg-gradient-to-r from-sky-600 to-blue-600 px-4 py-2.5 text-white shadow-md shadow-sky-600/20"
-    >
-      <div class="flex items-center gap-2">
-        <svg class="h-4 w-4 shrink-0 text-sky-100" viewBox="0 0 24 24" fill="currentColor">
-          <path d="M12 2.69l5.66 5.66a8 8 0 1 1-11.31 0z" />
-        </svg>
-        <span class="text-xs font-extrabold tracking-wide uppercase">
-          Calculadora de goteo de solución
-        </span>
-      </div>
-      <button
-        type="button"
-        (click)="showHelp.set(true)"
-        aria-label="Abrir guía clínica y fórmula"
-        class="flex h-7 w-7 shrink-0 items-center justify-center rounded-full bg-white/20 text-xs font-black text-white transition hover:bg-white/30 active:scale-95"
-      >
-        ?
-      </button>
-    </div>
-
-    <!-- BANNER DE ALARMA DISPARADA (EN MODO PWA WEB) -->
-    @if (notifications.alarmTriggeredBanner(); as alertMsg) {
-      <div
-        role="alert"
-        class="mb-3 flex items-center justify-between gap-2 rounded-2xl bg-amber-500 px-4 py-3 text-xs font-extrabold text-white shadow-lg"
-      >
-        <span>🔔 {{ alertMsg }}</span>
+      <div class="flex items-center gap-1.5">
+        <!-- Botón de guía clínica -->
         <button
           type="button"
-          (click)="notifications.dismissTriggeredBanner()"
-          class="rounded-lg bg-white/20 px-2 py-1 text-[11px] hover:bg-white/30"
+          (click)="showHelp.set(true)"
+          aria-label="Abrir guía clínica"
+          class="flex h-8 w-8 items-center justify-center rounded-full bg-white text-xs font-black text-slate-600 shadow-xs hover:bg-slate-50 dark:border dark:border-slate-800 dark:bg-slate-900 dark:text-slate-300"
+        >
+          ?
+        </button>
+
+        <!-- Selector de modo oscuro -->
+        <button
+          type="button"
+          (click)="cycleTheme()"
+          title="Cambiar tema (Auto / Claro / Oscuro)"
+          class="flex items-center gap-1 rounded-full border border-slate-200 bg-white px-2.5 py-1.5 text-xs font-bold text-slate-600 shadow-xs transition hover:bg-slate-50 active:scale-95 dark:border-slate-800 dark:bg-slate-900 dark:text-slate-300"
+        >
+          @if (theme.isDark()) {
+            <svg class="h-3.5 w-3.5 text-sky-400" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round">
+              <path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z" />
+            </svg>
+          } @else {
+            <svg class="h-3.5 w-3.5 text-amber-500" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round">
+              <circle cx="12" cy="12" r="5" />
+              <line x1="12" y1="1" x2="12" y2="3" />
+              <line x1="12" y1="21" x2="12" y2="23" />
+              <line x1="4.22" y1="4.22" x2="5.64" y2="5.64" />
+              <line x1="18.36" y1="18.36" x2="19.78" y2="19.78" />
+              <line x1="1" y1="12" x2="3" y2="12" />
+              <line x1="21" y1="12" x2="23" y2="12" />
+              <line x1="4.22" y1="19.78" x2="5.64" y2="18.36" />
+              <line x1="18.36" y1="5.64" x2="19.78" y2="4.22" />
+            </svg>
+          }
+          <span class="text-[11px]">{{ themeLabel() }}</span>
+        </button>
+      </div>
+    </header>
+
+    <!-- 2. BARRA SUPERIOR FIJA DE CONTROL DE TURNO (ESTÁNDAR CLÍNICO) -->
+    @if (shiftManager.activeShift(); as shift) {
+      <div
+        class="mb-3 overflow-hidden rounded-2xl border border-sky-200/80 bg-white p-3 shadow-xs dark:border-sky-900/60 dark:bg-slate-900"
+      >
+        <div class="flex items-center justify-between text-xs">
+          <div class="flex items-center gap-1.5">
+            <span class="flex h-2 w-2 rounded-full bg-emerald-500 animate-pulse"></span>
+            <span class="font-extrabold text-slate-800 dark:text-slate-100">
+              {{ shift.label }}
+            </span>
+          </div>
+          <div class="font-mono text-xs font-black text-sky-700 dark:text-sky-400">
+            ⏳ {{ formattedShiftRemaining() }}
+          </div>
+        </div>
+
+        <!-- Barra de progreso del turno en tiempo real -->
+        <div class="mt-2 h-1.5 w-full overflow-hidden rounded-full bg-slate-100 dark:bg-slate-800">
+          <div
+            class="h-full rounded-full bg-gradient-to-r from-sky-500 to-blue-600 transition-all duration-1000"
+            [style.width.%]="shiftManager.shiftProgressPercent()"
+          ></div>
+        </div>
+
+        <div class="mt-1.5 flex items-center justify-between text-[10px] text-slate-500 dark:text-slate-400">
+          <span>Fin de turno: <strong>{{ formattedShiftEndTime() }}</strong></span>
+          <span class="font-bold text-slate-700 dark:text-slate-300">
+            {{ shiftManager.patients().length }} pacientes activos
+          </span>
+        </div>
+      </div>
+    }
+
+    <!-- BANNER DE ALERTA DE SUERO POR TERMINAR (EN SEGUNDO PLANO / PWA) -->
+    @if (multiNotifications.activeBanner(); as alert) {
+      <div
+        role="alert"
+        class="mb-3 flex items-start justify-between gap-2 rounded-2xl bg-gradient-to-r from-rose-600 to-amber-600 p-3.5 text-xs text-white shadow-lg animate-bounce"
+      >
+        <div>
+          <div class="font-black">{{ alert.title }}</div>
+          <div class="mt-0.5 text-[11px] text-white/90">{{ alert.body }}</div>
+        </div>
+        <button
+          type="button"
+          (click)="multiNotifications.dismissBanner()"
+          class="shrink-0 rounded-lg bg-white/25 px-2 py-1 text-[11px] font-extrabold hover:bg-white/35"
         >
           OK
         </button>
       </div>
     }
 
-    <!-- NAVEGACIÓN PRINCIPAL DE DOS VISTAS -->
+    <!-- NAVEGACIÓN PRINCIPAL DE 3 PESTAÑAS -->
     <nav
-      aria-label="Vistas principales"
-      class="mb-4 grid grid-cols-2 gap-1 rounded-full border border-slate-200/80 bg-white p-1 shadow-xs dark:border-slate-800 dark:bg-slate-900"
+      aria-label="Pestañas principales"
+      class="mb-3 grid grid-cols-3 gap-1 rounded-2xl border border-slate-200/80 bg-white p-1 shadow-xs dark:border-slate-800 dark:bg-slate-900"
     >
       <button
         type="button"
-        (click)="openConfig()"
-        class="flex items-center justify-center gap-2 rounded-full px-4 py-2.5 text-xs font-extrabold transition-all"
+        (click)="switchTab('dashboard')"
+        class="flex flex-col items-center justify-center rounded-xl py-2 text-center transition-all"
         [class]="
-          activeView() === 'config'
-            ? 'bg-gradient-to-r from-sky-500 to-blue-600 text-white shadow-md shadow-sky-600/25'
-            : 'text-slate-600 hover:text-sky-700 dark:text-slate-300 dark:hover:text-sky-400'
+          activeTab() === 'dashboard'
+            ? 'bg-gradient-to-r from-sky-500 to-blue-600 text-white shadow-xs font-black'
+            : 'text-slate-600 hover:text-sky-700 font-bold dark:text-slate-300 dark:hover:text-sky-400'
         "
       >
-        <svg class="h-4 w-4" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round">
-          <rect x="4" y="2" width="16" height="20" rx="2" />
-          <line x1="8" y1="6" x2="16" y2="6" />
-          <line x1="8" y1="10" x2="10" y2="10" />
-          <line x1="14" y1="10" x2="16" y2="10" />
-          <line x1="8" y1="14" x2="10" y2="14" />
-          <line x1="14" y1="14" x2="16" y2="14" />
-          <line x1="8" y1="18" x2="16" y2="18" />
-        </svg>
-        Configuración
+        <span class="text-xs">Pacientes</span>
+        <span
+          class="text-[10px]"
+          [class]="activeTab() === 'dashboard' ? 'text-sky-100' : 'text-slate-400'"
+        >
+          ({{ shiftManager.patients().length }})
+        </span>
       </button>
 
       <button
         type="button"
-        (click)="openResults()"
-        [disabled]="!calculator.isValid()"
-        class="flex items-center justify-center gap-2 rounded-full px-4 py-2.5 text-xs font-extrabold transition-all disabled:opacity-45"
+        (click)="switchTab('handover')"
+        class="flex flex-col items-center justify-center rounded-xl py-2 text-center transition-all"
         [class]="
-          activeView() === 'results'
-            ? 'bg-gradient-to-r from-sky-500 to-blue-600 text-white shadow-md shadow-sky-600/25'
-            : 'text-slate-600 hover:text-sky-700 dark:text-slate-300 dark:hover:text-sky-400'
+          activeTab() === 'handover'
+            ? 'bg-gradient-to-r from-sky-500 to-blue-600 text-white shadow-xs font-black'
+            : 'text-slate-600 hover:text-sky-700 font-bold dark:text-slate-300 dark:hover:text-sky-400'
         "
       >
-        <svg class="h-4 w-4" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round">
-          <polyline points="22 12 18 12 15 21 9 3 6 12 2 12" />
-        </svg>
-        Monitorización
-        @if (notifications.activeAlarm()) {
-          <span class="h-2 w-2 rounded-full bg-emerald-400"></span>
-        }
+        <span class="text-xs">Entrega Turno</span>
+        <span
+          class="text-[10px]"
+          [class]="activeTab() === 'handover' ? 'text-sky-100' : 'text-slate-400'"
+        >
+          Balance
+        </span>
+      </button>
+
+      <button
+        type="button"
+        (click)="switchTab('calculator')"
+        class="flex flex-col items-center justify-center rounded-xl py-2 text-center transition-all"
+        [class]="
+          activeTab() === 'calculator'
+            ? 'bg-gradient-to-r from-sky-500 to-blue-600 text-white shadow-xs font-black'
+            : 'text-slate-600 hover:text-sky-700 font-bold dark:text-slate-300 dark:hover:text-sky-400'
+        "
+      >
+        <span class="text-xs">Calculadora</span>
+        <span
+          class="text-[10px]"
+          [class]="activeTab() === 'calculator' ? 'text-sky-100' : 'text-slate-400'"
+        >
+          Rápida
+        </span>
       </button>
     </nav>
 
-    <!-- CONTENIDO DE LA VISTA ACTIVA -->
+    <!-- CONTENIDO SEGÚN LA PESTAÑA ACTIVA -->
     <main class="flex-1">
-      @if (activeView() === 'config') {
-        <app-config-view (calculated)="openResults()" />
+      @if (activeTab() === 'dashboard') {
+        @if (!shiftManager.hasActiveShift()) {
+          <app-shift-setup />
+        } @else if (selectedPatientId(); as patId) {
+          <app-patient-detail-view
+            [patientId]="patId"
+            (back)="selectedPatientId.set(null)"
+            (editClicked)="openEditPatientModal($event)"
+          />
+        } @else {
+          <app-patient-dashboard
+            (addPatientClicked)="openAddPatientModal()"
+            (patientSelected)="onSelectPatient($event)"
+          />
+        }
+      } @else if (activeTab() === 'handover') {
+        @if (!shiftManager.hasActiveShift()) {
+          <app-shift-setup />
+        } @else {
+          <app-shift-handover (shiftFinished)="onShiftFinished()" />
+        }
       } @else {
-        <app-results-view (editConfig)="openConfig()" />
+        <!-- CALCULADORA RÁPIDA INDIVIDUAL -->
+        <div class="space-y-3">
+          <div
+            class="grid grid-cols-2 gap-1 rounded-2xl bg-white p-1 border border-slate-200 dark:bg-slate-900 dark:border-slate-800"
+          >
+            <button
+              type="button"
+              (click)="openCalcConfig()"
+              class="rounded-xl py-2 text-xs font-extrabold transition"
+              [class]="
+                calcActiveView() === 'config'
+                  ? 'bg-sky-600 text-white'
+                  : 'text-slate-600 dark:text-slate-300'
+              "
+            >
+              Configuración
+            </button>
+            <button
+              type="button"
+              (click)="openCalcResults()"
+              [disabled]="!calculator.isValid()"
+              class="rounded-xl py-2 text-xs font-extrabold transition disabled:opacity-40"
+              [class]="
+                calcActiveView() === 'results'
+                  ? 'bg-sky-600 text-white'
+                  : 'text-slate-600 dark:text-slate-300'
+              "
+            >
+              Cámara en Vivo
+            </button>
+          </div>
+
+          @if (calcActiveView() === 'config') {
+            <app-config-view (calculated)="openCalcResults()" />
+          } @else {
+            <app-results-view (editConfig)="openCalcConfig()" />
+          }
+        </div>
       }
     </main>
 
-    <!-- PIE DISCRETO -->
-    <footer class="mt-6 text-center text-[11px] font-medium text-slate-400 dark:text-slate-600">
-      PWA lista para uso offline y empaquetado nativo con Capacitor
+    <!-- PIE -->
+    <footer class="mt-6 text-center text-[10px] font-medium text-slate-400 dark:text-slate-600">
+      GoteoMed APH · Persistencia activa en segundo plano con marcas de tiempo (Date.now)
     </footer>
   </div>
 </div>
 
+<!-- MODAL DE AGREGAR / EDITAR PACIENTE -->
+@if (showPatientModal()) {
+  <app-patient-form-modal
+    [existingPatient]="editingPatient()"
+    (saved)="onSavePatient($event)"
+    (cancelled)="showPatientModal.set(false)"
+  />
+}
+
+<!-- MODAL DE GUÍA CLÍNICA Y FÓRMULAS -->
 @if (showHelp()) {
   <app-help-modal (closed)="showHelp.set(false)" />
 }

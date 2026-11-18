@@ -14,13 +14,14 @@ describe('App', () => {
     expect(app).toBeTruthy();
   });
 
-  it('debe mostrar el encabezado clínico y la vista inicial de configuración', async () => {
+  it('debe mostrar el encabezado clínico y la navegación de turnos y multi-paciente', async () => {
     const fixture = TestBed.createComponent(App);
     fixture.detectChanges();
     await fixture.whenStable();
     const compiled = fixture.nativeElement as HTMLElement;
     expect(compiled.textContent).toContain('GoteoMed');
-    expect(compiled.textContent).toContain('Calculadora de goteo de solución');
-    expect(compiled.textContent).toContain('Calcular y Monitorizar');
+    expect(compiled.textContent).toContain('Pacientes');
+    expect(compiled.textContent).toContain('Entrega Turno');
+    expect(compiled.textContent).toContain('Calculadora');
   });
 });
