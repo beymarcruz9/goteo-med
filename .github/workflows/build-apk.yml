@@ -1,0 +1,68 @@
+name: Compilar y Publicar APK (GoteoMed APH)
+
+on:
+  push:
+    branches:
+      - main
+  workflow_dispatch:
+
+permissions:
+  contents: write
+
+jobs:
+  build-android-apk:
+    name: Generar GoteoMed-APH.apk
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Descargar código del repositorio
+        uses: actions/checkout@v4
+
+      - name: Configurar Node.js 22 LTS
+        uses: actions/setup-node@v4
+        with:
+          node-version: '22'
+          cache: 'npm'
+
+      - name: Configurar Java 21 (requerido por Capacitor 7 / Gradle)
+        uses: actions/setup-java@v4
+        with:
+          distribution: 'temurin'
+          java-version: '21'
+
+      - name: Instalar dependencias npm
+        run: npm ci
+
+      - name: Compilar aplicación Angular PWA
+        run: npm run build
+
+      - name: Sincronizar assets con Capacitor Android
+        run: npx cap sync android
+
+      - name: Compilar APK de Android con Gradle
+        working-directory: android
+        run: |
+          chmod +x gradlew
+          ./gradlew assembleDebug --no-daemon
+
+      - name: Preparar archivo GoteoMed-APH.apk
+        run: cp android/app/build/outputs/apk/debug/app-debug.apk GoteoMed-APH.apk
+
+      - name: Subir APK como Artifact de GitHub Actions
+        uses: actions/upload-artifact@v4
+        with:
+          name: GoteoMed-APH-APK
+          path: GoteoMed-APH.apk
+          retention-days: 90
+
+      - name: Publicar enlace directo de descarga en GitHub Releases
+        env:
+          GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+        run: |
+          if gh release view latest >/dev/null 2>&1; then
+            gh release upload latest GoteoMed-APH.apk --clobber
+          else
+            gh release create latest GoteoMed-APH.apk \
+              --title "GoteoMed APH — Última versión APK" \
+              --notes "Aplicación móvil de cálculo de goteo intravenoso (venoclisis) para enfermería y APH. Descarga el archivo **GoteoMed-APH.apk** en tu teléfono Android y ábrelo para instalar."
+          fi

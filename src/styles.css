@@ -1,0 +1,44 @@
+@import "tailwindcss";
+
+/*
+ * Habilita modo oscuro automático nativo sincronizado con prefers-color-scheme
+ * y controlado mediante la clase .dark en <html> (gestionado por ThemeService).
+ */
+@custom-variant dark (&:where(.dark, .dark *));
+
+@layer base {
+  html {
+    font-family:
+      'Inter',
+      -apple-system,
+      BlinkMacSystemFont,
+      'Segoe UI',
+      Roboto,
+      Oxygen,
+      Ubuntu,
+      Cantarell,
+      sans-serif;
+    -webkit-tap-highlight-color: transparent;
+    scroll-behavior: smooth;
+  }
+
+  /* Evitar flechas numéricas nativas que ensucian la UI móvil */
+  input[type='number']::-webkit-inner-spin-button,
+  input[type='number']::-webkit-outer-spin-button {
+    -webkit-appearance: none;
+    margin: 0;
+  }
+
+  input[type='number'] {
+    -moz-appearance: textfield;
+  }
+}
+
+/* Safe area padding para dispositivos móviles envueltos con Capacitor / PWA standalone */
+.safe-top {
+  padding-top: max(env(safe-area-inset-top), 0.75rem);
+}
+
+.safe-bottom {
+  padding-bottom: max(env(safe-area-inset-bottom), 1rem);
+}

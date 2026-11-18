@@ -1,0 +1,27 @@
+{
+  "name": "GoteoMed APH — Cálculo de Venoclisis",
+  "short_name": "GoteoMed",
+  "description": "Calculadora médica de goteo intravenoso (venoclisis) con cámara de goteo en tiempo real, metrónomo de audio, vibración háptica y alarmas para enfermería y APH.",
+  "theme_color": "#0284c7",
+  "background_color": "#f1f5f9",
+  "display": "standalone",
+  "orientation": "portrait",
+  "scope": "/",
+  "start_url": "/",
+  "lang": "es",
+  "categories": ["medical", "health", "utilities"],
+  "icons": [
+    {
+      "src": "icons/icon.svg",
+      "sizes": "any",
+      "type": "image/svg+xml",
+      "purpose": "any"
+    },
+    {
+      "src": "icons/icon-maskable.svg",
+      "sizes": "any",
+      "type": "image/svg+xml",
+      "purpose": "maskable"
+    }
+  ]
+}

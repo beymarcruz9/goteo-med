@@ -1,0 +1,42 @@
+<!doctype html>
+<html lang="es">
+  <head>
+    <meta charset="utf-8" />
+    <title>GoteoMed APH — Calculadora de Goteo Intravenoso</title>
+    <base href="/" />
+    <meta
+      name="viewport"
+      content="width=device-width, initial-scale=1, viewport-fit=cover, maximum-scale=1, user-scalable=no"
+    />
+    <meta
+      name="description"
+      content="Calculadora de goteo de soluciones intravenosas (venoclisis) con simulador de cámara de goteo en tiempo real para enfermería y APH."
+    />
+    <meta name="theme-color" content="#0284c7" media="(prefers-color-scheme: light)" />
+    <meta name="theme-color" content="#0f172a" media="(prefers-color-scheme: dark)" />
+    <meta name="apple-mobile-web-app-capable" content="yes" />
+    <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent" />
+    <meta name="apple-mobile-web-app-title" content="GoteoMed" />
+    <link rel="icon" type="image/svg+xml" href="icons/icon.svg" />
+    <link rel="apple-touch-icon" href="icons/icon.svg" />
+    <link rel="manifest" href="manifest.webmanifest" />
+    <script>
+      (function () {
+        try {
+          var saved = localStorage.getItem('goteomed_theme');
+          var prefersDark = window.matchMedia('(prefers-color-scheme: dark)').matches;
+          var isDark = saved === 'dark' || ((!saved || saved === 'auto') && prefersDark);
+          if (isDark) document.documentElement.classList.add('dark');
+        } catch (e) {}
+      })();
+    </script>
+  </head>
+  <body
+    class="min-h-dvh bg-slate-100 text-slate-900 antialiased selection:bg-sky-200 selection:text-sky-900 dark:bg-slate-950 dark:text-slate-100 dark:selection:bg-sky-800 dark:selection:text-sky-100"
+  >
+    <app-root></app-root>
+    <noscript>
+      Por favor, activa JavaScript para usar la calculadora médica GoteoMed APH.
+    </noscript>
+  </body>
+</html>
